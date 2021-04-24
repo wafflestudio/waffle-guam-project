@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: test
+
+---
+spring.profiles.include:
+  - service
+
+---
+spring:
+  profiles: test
+
+server:
+  port: 8080
+
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8080
+
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8080

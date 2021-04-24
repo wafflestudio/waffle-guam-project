@@ -1,0 +1,21 @@
+spring.profiles: test
+
+spring:
+
+  datasource:
+    url: jdbc:h2:~/test
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+
+---
+spring.profiles: dev
+
+---
+spring.profiles: prod
