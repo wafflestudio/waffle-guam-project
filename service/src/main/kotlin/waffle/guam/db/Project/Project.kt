@@ -21,19 +21,8 @@ data class Project(
     var members: List<User> = ArrayList<User>()
 ) {
 
-    fun toProjectDTO(): ProjectCreateDTO{
-        return ProjectCreateDTO(
-            title = title,
-            description = description,
-            difficulty = difficulty,
-            thumbnail = thumbnail,
-            dev_type = dev_type,
-            members = members
-        )
-    }
-
-    fun toProjectReadDTO(): ProjectReadDTO{
-        return ProjectReadDTO(
+    fun toProjectDTO(): ProjectDTO{
+        return ProjectDTO(
             id = id,
             title = title,
             description = description,

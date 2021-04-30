@@ -2,8 +2,7 @@ package waffle.guam.controller
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import waffle.guam.db.Project.ProjectCreateDTO
-import waffle.guam.db.Project.ProjectUpdateDTO
+import waffle.guam.db.Project.*
 import waffle.guam.service.ProjectService
 
 @RestController
@@ -13,33 +12,33 @@ class ProjectController(
 ) {
 
     @PostMapping("/project")
-    fun createProject(@RequestBody projectCreateDTO: ProjectCreateDTO): ResponseEntity<Any>?{
-        projectService.createProject(projectCreateDTO)
-        return ResponseEntity.ok().body(true)
+    @ResponseBody
+    fun createProject(@RequestBody projectCreateDTO: ProjectCreateDTO){
+        return projectService.createProject(projectCreateDTO)
     }
 
     @PostMapping("/projects/{id}/update")
-    fun deleteProject(@PathVariable id: Long, @RequestBody projectUpdateDTO: Pro jectUpdateDTO): ResponseEntity<Any>? {
-        projectService.updateProject(id, projectUpdateDTO)
-        return ResponseEntity.ok().body(true)
+    @ResponseBody
+    fun deleteProject(@PathVariable id: Long, @RequestBody projectUpdateDTO: ProjectUpdateDTO): ProjectDTO{
+        return projectService.updateProject(id, projectUpdateDTO)
     }
 
     @GetMapping("/projects")
-    fun getAllProjects(): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(projectService.getAllProjects())
+    @ResponseBody
+    fun getAllProjects(): List<ProjectDTO> {
+        return projectService.getAllProjects()
     }
 
     @GetMapping("/projects/{id}")
-    fun findProject(@PathVariable id: Long): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(projectService.findProject(id))
+    @ResponseBody
+    fun findProject(@PathVariable id: Long): ProjectDTO {
+        return projectService.findProject(id)
     }
 
     @PostMapping("/projects/{id}/delete")
-    fun updateProject(@PathVariable id: Long): ResponseEntity<Any>? {
-        projectService.deleteProject(id)
-        return ResponseEntity.ok().body(true)
+    @ResponseBody
+    fun updateProject(@PathVariable id: Long) {
+        return projectService.deleteProject(id)
     }
-}.
-
-
+}
 

@@ -15,7 +15,7 @@ class ProjectCreateDTO(
 ) {
 
     fun toEntity(): Project{
-        val time = LocalDateTime.now();
+        val time = LocalDateTime.now()
         return Project(
             title = title,
             description = description,

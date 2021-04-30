@@ -3,7 +3,7 @@ package waffle.guam.db.Project
 import waffle.guam.db.User
 import java.time.LocalDateTime
 
-class ProjectReadDTO(
+class ProjectDTO(
     val id: Long? = null,
     val title: String? = null,
     val description: String? = null,
@@ -14,5 +14,8 @@ class ProjectReadDTO(
     val createdAt: LocalDateTime? = null
 
 ) {
+    fun update(p: ProjectUpdateDTO): ProjectDTO {
+        return ProjectDTO( this.id, p.title, p.description, p.difficulty, p.thumbnail, p.dev_type, p.members, this.createdAt )
+    }
 
 }

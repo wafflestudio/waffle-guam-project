@@ -9,7 +9,8 @@ class ProjectUpdateDTO(
     val description: String? = null,
     val difficulty: Difficulties? = null,
     val thumbnail: String? = null,
-    val dev_type: String? = null
+    val dev_type: String? = null,
+    val members: List<User>
 
 ) {
 
