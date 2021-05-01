@@ -1,36 +1,53 @@
 package waffle.guam.service
 
 import org.springframework.stereotype.Service
-import waffle.guam.db.Project.ProjectCreateDTO
+import waffle.guam.db.DevType.DevTypeDTO
 import waffle.guam.db.Project.ProjectDTO
-import waffle.guam.db.Project.ProjectUpdateDTO
+import waffle.guam.db.Project.ProjectReadDTO
 import waffle.guam.repository.ProjectRepository
+import waffle.guam.repository.StackRepository
 
 @Service
 class ProjectService(
-    private val projectRepository: ProjectRepository
+    private val projectRepository: ProjectRepository,
+    private val stackService: StackService
 ) {
-
-    fun createProject(projectCreateDTO: ProjectCreateDTO) {
-        val done = projectRepository.save(projectCreateDTO.toEntity())
+    //C
+    fun createProject(projectDTO: ProjectReadDTO): Boolean {
+        projectRepository.save(projectDTO.toEntity())
+        return true
     }
 
-    fun getAllProjects(): List<ProjectDTO>{
+    //R
+    fun getAllProjects(): List<ProjectReadDTO>{
         val allProjects = projectRepository.findAll()
-        return allProjects.map { it.toProjectDTO() }
+        return allProjects.map { ProjectReadDTO.of(it) }
     }
 
-    fun findProject(id: Long): ProjectDTO{
-        val target = projectRepository.findById(id)
-        return target.get().toProjectDTO()
+    fun findProject(id: Long): ProjectReadDTO{
+        val target = projectRepository.findById(id).get()
+        return ProjectReadDTO.of(target)
     }
 
-    fun updateProject(id: Long, p: ProjectUpdateDTO): ProjectDTO {
-        val target = (projectRepository.findById(id)).get().toProjectDTO()
-        return target.update(p)
+    //U
+    fun updateProject(id: Long, p: ProjectReadDTO): ProjectDTO {
+        val target = (projectRepository.findById(id)).get()
+        val res = ProjectDTO.of(target).update(p)
+        projectRepository.save(res.toEntity())
+        return res
     }
 
-    fun deleteProject(id: Long){
+    // for test
+    // add all devType available, return added project
+//    fun addAllDevType(id: Long): ProjectDTO {
+//        val target = projectRepository.findById(id).get()
+//        val list: List<DevTypeDTO> = stackService.getAll()
+//        return projectRepository.save(ProjectDTO.of(target).addDev(list))
+//    }
+
+    //D
+    fun deleteProject(id: Long): Boolean{
         projectRepository.deleteById(id)
+        return true;
     }
 }

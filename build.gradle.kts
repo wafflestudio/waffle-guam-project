@@ -1,9 +1,11 @@
+
 plugins {
     id("org.springframework.boot") version "2.3.4.RELEASE" apply false
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     kotlin("jvm") version "1.4.20"
     kotlin("plugin.spring") version "1.4.20"
     kotlin("plugin.jpa") version "1.4.20" apply false
+   // kotlin("kapt") version "1.4.20"
 }
 
 group = "waffle.guam"
@@ -50,6 +52,11 @@ subprojects{
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
+        // map-struct
+        // map-struct Annotation Processor
+        //implementation("org.mapstruct:mapstruct:1.3.0.Final")
+        //kapt("org.mapstruct:mapstruct-processor:1.3.0.Final")
+        //kaptTest("org.mapstruct:mapstruct-processor:1.3.0.Final")
     }
 }
 

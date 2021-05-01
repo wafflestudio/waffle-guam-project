@@ -9,7 +9,11 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
-    @ManyToMany(mappedBy = "members")
-    val projects: List<Project>? = ArrayList<Project>()
+    @OneToMany(mappedBy = "user")
+    val front_projects: List<UserProject> = ArrayList(),
+    @OneToMany(mappedBy = "user")
+    val back_projects: List<UserProject> = ArrayList(),
+    @OneToMany(mappedBy = "user")
+    val design_projects: List<UserProject> = ArrayList()
 )
 

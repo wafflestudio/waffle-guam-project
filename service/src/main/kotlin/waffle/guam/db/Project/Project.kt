@@ -1,6 +1,8 @@
 package waffle.guam.db.Project
 
-import waffle.guam.db.User
+import org.springframework.data.annotation.CreatedDate
+import waffle.guam.db.ProjectDev
+import waffle.guam.db.UserProject
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -10,34 +12,50 @@ data class Project(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
-    var title: String? = null,
-    var description: String? = null,
-    var difficulty: Difficulties? = null,
-    var thumbnail: String? = null,
-    var dev_type: String? = null,
-    val createdAt: LocalDateTime? = null,
-    @ManyToMany()
-    @JoinTable(name = "User_Project")
-    var members: List<User> = ArrayList<User>()
+
+    @Column(name = "title")
+    val title: String = "",
+
+    @Column(name = "description")
+    val description: String = "",
+
+    @Column(name = "difficulty")
+    val difficulty: Int = Difficulty.Beginner.ordinal,
+
+    @Column(name = "thumbnail")
+    val thumbnail: String = "",
+
+    @CreatedDate
+    @Column(name = "created_at")
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "due")
+    val due: LocalDateTime = LocalDateTime.MAX,
+    val isRecruiting: Boolean = false,
+
+    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "project")
+    val dev_type: List<ProjectDev> = ArrayList(),
+
+    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "project")
+    val frontends: List<UserProject> = ArrayList(),
+    val front_left: Int = 0,
+
+    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "project")
+    val backends: List<UserProject> = ArrayList(),
+    val back_left: Int = 0,
+
+    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "project")
+    val designers: List<UserProject> = ArrayList(),
+    val design_left: Int = 0
 ) {
-
-    fun toProjectDTO(): ProjectDTO{
-        return ProjectDTO(
-            id = id,
-            title = title,
-            description = description,
-            difficulty = difficulty,
-            thumbnail = thumbnail,
-            dev_type = dev_type,
-            members = members,
-            createdAt = createdAt
-        )
-    }
-
 
 }
 
-enum class Difficulties{
+enum class Difficulty{
     Beginner, Easy, Normal, Intermediate, Master
 }
 

@@ -1,6 +1,5 @@
 package waffle.guam.controller
 
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import waffle.guam.db.Project.*
 import waffle.guam.service.ProjectService
@@ -11,34 +10,48 @@ class ProjectController(
     private val projectService: ProjectService
 ) {
 
+    // C
     @PostMapping("/project")
     @ResponseBody
-    fun createProject(@RequestBody projectCreateDTO: ProjectCreateDTO){
-        return projectService.createProject(projectCreateDTO)
+    fun createProject(@RequestBody projectDTO: ProjectReadDTO): Boolean{
+        return projectService.createProject(projectDTO)
     }
 
-    @PostMapping("/projects/{id}/update")
-    @ResponseBody
-    fun deleteProject(@PathVariable id: Long, @RequestBody projectUpdateDTO: ProjectUpdateDTO): ProjectDTO{
-        return projectService.updateProject(id, projectUpdateDTO)
-    }
-
+    //R
     @GetMapping("/projects")
     @ResponseBody
-    fun getAllProjects(): List<ProjectDTO> {
+    fun getAllProjects(): List<ProjectReadDTO> {
         return projectService.getAllProjects()
     }
 
     @GetMapping("/projects/{id}")
     @ResponseBody
-    fun findProject(@PathVariable id: Long): ProjectDTO {
+    fun findProject(@PathVariable id: Long): ProjectReadDTO {
         return projectService.findProject(id)
     }
 
-    @PostMapping("/projects/{id}/delete")
+    //U
+    @PutMapping("/projects/{id}/update")
     @ResponseBody
-    fun updateProject(@PathVariable id: Long) {
+    fun updateProject(@PathVariable id: Long, @RequestBody projectReadDTO: ProjectReadDTO): ProjectDTO{
+        return projectService.updateProject(id, projectReadDTO)
+    }
+
+//    @PutMapping("/projects/{id}/addall")
+//    @ResponseBody
+//    fun addAllDT(@PathVariable id: Long): ProjectDTO{
+//        return projectService.addAllDevType(id)
+//    }
+
+    //D
+    @DeleteMapping("/projects/{id}/delete")
+    @ResponseBody
+    fun deleteProject(@PathVariable id: Long): Boolean {
         return projectService.deleteProject(id)
     }
+
+
+
+
 }
 
