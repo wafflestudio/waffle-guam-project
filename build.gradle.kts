@@ -52,11 +52,8 @@ subprojects{
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))
-        // map-struct
-        // map-struct Annotation Processor
-        //implementation("org.mapstruct:mapstruct:1.3.0.Final")
-        //kapt("org.mapstruct:mapstruct-processor:1.3.0.Final")
-        //kaptTest("org.mapstruct:mapstruct-processor:1.3.0.Final")
+        implementation("io.springfox:springfox-swagger2:2.9.2")
+        implementation("io.springfox:springfox-swagger-ui:2.9.2")
     }
 }
 
