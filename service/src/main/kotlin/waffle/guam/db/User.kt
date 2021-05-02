@@ -1,6 +1,5 @@
 package waffle.guam.db
 
-import waffle.guam.db.Project.Project
 import javax.persistence.*
 
 @Table(name = "users")
@@ -10,10 +9,10 @@ data class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
     @OneToMany(mappedBy = "user")
-    val front_projects: List<UserProject> = ArrayList(),
+    val front_projectUsers: List<ProjectUser> = ArrayList(),
     @OneToMany(mappedBy = "user")
-    val back_projects: List<UserProject> = ArrayList(),
+    val back_projectUsers: List<ProjectUser> = ArrayList(),
     @OneToMany(mappedBy = "user")
-    val design_projects: List<UserProject> = ArrayList()
+    val design_projectUsers: List<ProjectUser> = ArrayList()
 )
 

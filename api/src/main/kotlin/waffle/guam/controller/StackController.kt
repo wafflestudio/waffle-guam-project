@@ -1,11 +1,8 @@
 package waffle.guam.controller
 
-import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
-import waffle.guam.db.DevType.DevTypeDTO
-import waffle.guam.db.Project.ProjectDTO
-import waffle.guam.db.Project.ProjectReadDTO
+import waffle.guam.db.DevType.TechStackDTO
 import waffle.guam.service.StackService
 
 @Controller
@@ -22,14 +19,14 @@ class StackController(
     // C
     @PostMapping("/stack")
     @ResponseBody
-    fun createStack(@RequestBody devTypeDTO: DevTypeDTO): Boolean{
-        return stackService.create(devTypeDTO)
+    fun createStack(@RequestBody techStackDTO: TechStackDTO): Boolean{
+        return stackService.create(techStackDTO)
     }
 
     //R
     @GetMapping("/stacks")
     @ResponseBody
-    fun getAllProjects(): List<DevTypeDTO> {
+    fun getAllProjects(): List<TechStackDTO> {
         return stackService.getAll()
     }
 
@@ -37,8 +34,8 @@ class StackController(
 
     @GetMapping("/hashtag")
     @ResponseBody
-    fun findByName(@RequestParam word: String): List<DevTypeDTO> {
-        return stackService.searchByName(word)
+    fun findByName(@RequestParam word: String): List<TechStackDTO> {
+        return stackService.searchByKeyword(word)
     }
 
     //U

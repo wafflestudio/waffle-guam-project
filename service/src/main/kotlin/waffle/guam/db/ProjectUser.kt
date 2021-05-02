@@ -4,16 +4,16 @@ import javax.persistence.*
 
 @Table(name = "UserProject")
 @Entity
-data class UserProject(
+data class ProjectUser(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
     @ManyToOne
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    val project: Project = Project(),
+    var project: Project = Project(),
     @ManyToOne
     @JoinColumn(name = "id", insertable = false, updatable = false)
-    val user: User = User(),
+    var user: User = User(),
     val position: Int = Position.Frontend.ordinal,
 )
 
