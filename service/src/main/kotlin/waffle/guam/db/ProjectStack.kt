@@ -12,7 +12,7 @@ data class ProjectStack(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
-    @ManyToOne(cascade = [CascadeType.PERSIST])
+    @ManyToOne
     @JoinColumn(name = "PROJECT_ID_2")
     var project: Project? = null,
     @ManyToOne(cascade = [CascadeType.MERGE])

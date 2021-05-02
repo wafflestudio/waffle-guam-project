@@ -36,25 +36,14 @@ class StackService(
      # 여러가지 키워드로 검색했을 경우: 검색어마다 OR 처리 -> AND 위주로 보여줌
      # case Insensitive
     */
-    fun searchByKeyword(word: String): List<TechStackDTO> {
-
+    fun searchByKeyword(query: String): List<TechStackDTO> {
         val map = mutableMapOf<TechStackDTO, Int>()
-        val queries = word.split(", ") // 기술 스택에 대한 쿼리 검색어
 
         val devTypes = getAll()
         for (dev in devTypes) {
             val mappings = dev.mapping.split(", ")
-            for (name in mappings) {
-                var cnt = 0
-                for(q in queries) {
-                    // OR 처리, AND 우선 -> cnt 로 구현 가능
-                    if(searchEngine.containsQ(name, q) >= 0) cnt++
-                }
-                if(cnt > 0){
-                    map[dev] = cnt
-                    break
-                }
-            }
+            val cnt = searchEngine.search(mappings, query)
+            if ( cnt > 0 ) map[dev] = cnt
         }
         return map.toList().sortedWith(compareBy { -it.second }).map {it.first}
     }

@@ -14,7 +14,7 @@ data class ProjectReadDTO(
     val due: LocalDateTime = LocalDateTime.MAX,
     val isRecruiting: Boolean = false,
     // 클라에서 오고 갈 때는 DevType List 로 가지고 있자
-    val techStacks: List<TechStackDTO> = ArrayList(),
+    val techStacks: MutableList<TechStackDTO> = ArrayList(),
     val frontends: List<ProjectUser> = ArrayList(),
     val front_left: Int = 0,
     val backends: List<ProjectUser> = ArrayList(),
@@ -28,7 +28,7 @@ data class ProjectReadDTO(
             val l = e.techStacks.map { TechStackDTO.of( it.stack!! ) }
             return ProjectReadDTO(
                 e.id, e.title, e.description, e.difficulty, e.thumbnail, e.createdAt, e.due, e.isRecruiting,
-                l, e.frontends, e.front_left, e.backends, e.back_left, e.designers, e.design_left
+                l.toMutableList(), e.frontends, e.front_left, e.backends, e.back_left, e.designers, e.design_left
             )
         }
     }

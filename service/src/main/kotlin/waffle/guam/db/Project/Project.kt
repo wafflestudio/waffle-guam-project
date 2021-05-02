@@ -36,7 +36,7 @@ data class Project(
     val isRecruiting: Boolean = false,
 
     @OneToMany( orphanRemoval = true, mappedBy = "project", cascade = [CascadeType.ALL])
-    val techStacks: List<ProjectStack> = ArrayList(),
+    val techStacks: MutableList<ProjectStack> = ArrayList(),
 
     @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
     val frontends: List<ProjectUser> = ArrayList(),

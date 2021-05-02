@@ -1,5 +1,6 @@
 package waffle.guam.service
 
+import waffle.guam.db.DevType.TechStackDTO
 
 
 class SearchEngine {
@@ -77,5 +78,19 @@ class SearchEngine {
         }
         return -1
     }
+
+    // returns total cnt of q string in dic
+    fun search( dic: List<String>, q: String ): Int {
+        val queries = q.split(", ")
+        var cnt = 0
+        for (name in dic) {
+                for(q in queries) {
+                    // OR 처리, AND 우선 -> cnt 로 구현 가능
+                    if (containsQ(name, q) >= 0) cnt++
+                }
+            }
+        return cnt
+    }
+
 
 }

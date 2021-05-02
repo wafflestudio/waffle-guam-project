@@ -14,7 +14,7 @@ data class ProjectDTO(
     var due: LocalDateTime = LocalDateTime.MAX,
     var isRecruiting: Boolean = false,
     // Entity 랑 Type 달라짐
-    var techStacks: List<ProjectStack> = ArrayList(),
+    var techStacks: MutableList<ProjectStack> = ArrayList(),
     var frontends: List<ProjectUser> = ArrayList(),
     var front_left: Int = 0,
     var backends: List<ProjectUser> = ArrayList(),

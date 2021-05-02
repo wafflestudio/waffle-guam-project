@@ -32,10 +32,10 @@ class StackController(
 
     // ** Hashtag Search, Filters DevType
 
-    @GetMapping("/hashtag")
+    @GetMapping("/stacks/search")
     @ResponseBody
-    fun findByName(@RequestParam word: String): List<TechStackDTO> {
-        return stackService.searchByKeyword(word)
+    fun findByName(@RequestParam query: String): List<TechStackDTO> {
+        return stackService.searchByKeyword(query)
     }
 
     //U
