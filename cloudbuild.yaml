@@ -1,8 +1,8 @@
   steps:
     - name: 'gcr.io/cloud-builders/gradle'
       args: ['build']
-    - name: 'gcr.io/cloud-builders/gradle'
-      args: ['dockerBuild']
+    - name: 'gcr.io/cloud-builders/docker'
+      args: ['build', '-t', 'gcr.io/savvy-parser-312713/guam:v1', '.']
       timeout: 500s
     - name: 'gcr.io/cloud-builders/docker'
       args: [ 'push', 'gcr.io/savvy-parser-312713/guam:v1' ]
@@ -10,7 +10,7 @@
       args:
         - set
         - image
-        - ReplicationController/guam
+        - deployment/guam
         - guam=gcr.io/savvy-parser-312713/guam:v1'
       env:
         - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-c'
