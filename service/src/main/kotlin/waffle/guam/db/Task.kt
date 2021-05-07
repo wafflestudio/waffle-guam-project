@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Table(name = "UserProject")
 @Entity
-data class ProjectUser(
+data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
@@ -15,6 +15,7 @@ data class ProjectUser(
     @JoinColumn(name = "id", insertable = false, updatable = false)
     var user: User = User(),
     val position: Int = Position.Frontend.ordinal,
+    val tasks: String = ""
 )
 
 

@@ -1,6 +1,6 @@
 package waffle.guam.db.Project
 
-import waffle.guam.db.ProjectUser
+import waffle.guam.db.Task
 import waffle.guam.db.ProjectStack
 import java.time.LocalDateTime
 
@@ -15,11 +15,11 @@ data class ProjectDTO(
     var isRecruiting: Boolean = false,
     // Entity 랑 Type 달라짐
     var techStacks: MutableList<ProjectStack> = ArrayList(),
-    var frontends: List<ProjectUser> = ArrayList(),
+    var frontends: List<Task> = ArrayList(),
     var front_left: Int = 0,
-    var backends: List<ProjectUser> = ArrayList(),
+    var backends: List<Task> = ArrayList(),
     var back_left: Int = 0,
-    var designers: List<ProjectUser> = ArrayList(),
+    var designers: List<Task> = ArrayList(),
     var design_left: Int = 0
 ) {
     constructor(p: ProjectReadDTO): this( id = p.id,

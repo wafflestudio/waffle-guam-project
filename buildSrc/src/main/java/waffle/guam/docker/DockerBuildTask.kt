@@ -31,7 +31,7 @@ open class DockerBuildTask : DefaultTask() {
 
         project.exec {
             workingDir(dir)
-            commandLine("docker", "build", "-t", "guam", ".")
+            commandLine("docker", "build", "-t", "gcr.io/savvy-parser-312713/guam:v1", ".")
         }
     }
 }

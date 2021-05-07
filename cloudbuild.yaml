@@ -1,0 +1,20 @@
+  steps:
+    - name: 'gcr.io/cloud-builders/gradle'
+      args: ['build']
+    - name: 'gcr.io/cloud-builders/gradle'
+      args: ['dockerBuild']
+      timeout: 500s
+    - name: 'gcr.io/cloud-builders/docker'
+      args: [ 'push', 'gcr.io/savvy-parser-312713/guam:v1' ]
+    - name: 'gcr.io/cloud-builders/kubectl'
+      args:
+        - set
+        - image
+        - ReplicationController/guam
+        - guam=gcr.io/savvy-parser-312713/guam:v1'
+      env:
+        - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-c'
+        - 'CLOUDSDK_CONTAINER_CLUSTER=guam'
+  options:
+    machineType: 'N1_HIGHCPU_8' # HIGHCPU로 빌드 스피드 업
+  timeout: 1000s # 빌드 자체에 대한 타임 아웃

@@ -1,7 +1,7 @@
 package waffle.guam.repository.Junctions
 
 import org.springframework.data.jpa.repository.JpaRepository
-import waffle.guam.db.ProjectUser
+import waffle.guam.db.Task
 
-interface ProjectUserRepository: JpaRepository<ProjectUser, Long> {
+interface ProjectUserRepository: JpaRepository<Task, Long> {
 }
