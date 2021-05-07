@@ -1,10 +1,8 @@
 package waffle.guam.db.Project
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.springframework.data.annotation.CreatedDate
 import waffle.guam.db.ProjectStack
-import waffle.guam.db.ProjectUser
+import waffle.guam.db.Task
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -39,15 +37,15 @@ data class Project(
     val techStacks: MutableList<ProjectStack> = ArrayList(),
 
     @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
-    val frontends: List<ProjectUser> = ArrayList(),
+    val frontends: List<Task> = ArrayList(),
     val front_left: Int = 0,
 
     @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
-    val backends: List<ProjectUser> = ArrayList(),
+    val backends: List<Task> = ArrayList(),
     val back_left: Int = 0,
 
     @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
-    val designers: List<ProjectUser> = ArrayList(),
+    val designers: List<Task> = ArrayList(),
     val design_left: Int = 0
 ) {
 

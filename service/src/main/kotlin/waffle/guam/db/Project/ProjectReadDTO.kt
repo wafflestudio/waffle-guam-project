@@ -1,7 +1,7 @@
 package waffle.guam.db.Project
 
 import waffle.guam.db.DevType.TechStackDTO
-import waffle.guam.db.ProjectUser
+import waffle.guam.db.Task
 import java.time.LocalDateTime
 
 data class ProjectReadDTO(
@@ -15,11 +15,11 @@ data class ProjectReadDTO(
     val isRecruiting: Boolean = false,
     // 클라에서 오고 갈 때는 DevType List 로 가지고 있자
     val techStacks: MutableList<TechStackDTO> = ArrayList(),
-    val frontends: List<ProjectUser> = ArrayList(),
+    val frontends: List<Task> = ArrayList(),
     val front_left: Int = 0,
-    val backends: List<ProjectUser> = ArrayList(),
+    val backends: List<Task> = ArrayList(),
     val back_left: Int = 0,
-    val designers: List<ProjectUser> = ArrayList(),
+    val designers: List<Task> = ArrayList(),
     val design_left: Int = 0
 ) {
 
