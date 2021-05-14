@@ -11,18 +11,18 @@ spring:
   profiles: test
 
 server:
-  port: 8080
+  port: 9002
 
 ---
 spring:
   profiles: dev
 
 server:
-  port: 8080
+  port: 9001
 
 ---
 spring:
   profiles: prod
 
 server:
-  port: 8080
+  port: 9000
