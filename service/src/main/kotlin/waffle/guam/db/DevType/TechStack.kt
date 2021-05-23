@@ -2,14 +2,15 @@ package waffle.guam.db.DevType
 
 import javax.persistence.*
 
-@Table(name = "DevType")
+@Table(name = "techstacks")
 @Entity
 data class TechStack(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
-    val type: String = "",
-    val mapping: String = "",
+
+    val name: String = "",
+    val aliases: String = "",
     val thumbnail: String = ""
 ){
 

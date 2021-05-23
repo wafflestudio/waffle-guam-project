@@ -57,9 +57,4 @@ subprojects{
     }
 }
 
-//
-//buildscript{
-//    dependencies {
-//        classpath("plugins/build/libs/plugin.jar")
-//    }
-//}
+

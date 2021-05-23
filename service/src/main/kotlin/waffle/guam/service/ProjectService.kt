@@ -59,21 +59,25 @@ class ProjectService(
         val target = (projectRepository.findById(id)).get()
         val new = ProjectDTO.of(target).update(p).toEntity()
 
-        // 포함중인건 포인터만 바꿔
-        new.techStacks.filter { l.contains(it.stack) }.map {
-            it.project = new
-        }
-
-        // 포함 안하는 것중에 l 에 남아있는건 따로 저장
-        l.toMutableSet().subtract( new.techStacks.map { it.stack }.toSet()).map {
+        l.map {
             new.techStacks.add(ProjectStack( stack = it, project = new ))
         }
 
-        //포함 안하는건 지워줌
-        new.techStacks.filter{ !l.contains(it.stack) }.map {
-            new.techStacks.remove(it)
-            projectStackRepository.deleteById(it.id)
-        }
+//        // 포함중인건 포인터만 바꿔
+//        new.techStacks.filter { l.contains(it.stack) }.map {
+//            it.project = new
+//        }
+//
+//        // 포함 안하는 것중에 l 에 남아있는건 따로 저장
+//        l.toMutableSet().subtract( new.techStacks.map { it.stack }.toSet()).map {
+//            new.techStacks.add(ProjectStack( stack = it, project = new ))
+//        }
+//
+//        //포함 안하는건 지워줌
+//        new.techStacks.filter{ !l.contains(it.stack) }.map {
+//            new.techStacks.remove(it)
+//            projectStackRepository.deleteById(it.id)
+//        }
         projectRepository.save(new)
         return p
     }

@@ -41,7 +41,7 @@ class StackService(
 
         val devTypes = getAll()
         for (dev in devTypes) {
-            val mappings = dev.mapping.split(", ")
+            val mappings = dev.aliases.split(", ")
             val cnt = searchEngine.search(mappings, query)
             if ( cnt > 0 ) map[dev] = cnt
         }

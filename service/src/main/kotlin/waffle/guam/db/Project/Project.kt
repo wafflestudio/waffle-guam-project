@@ -13,45 +13,26 @@ data class Project(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
 
-    @Column(name = "title")
     val title: String = "",
 
-    @Column(name = "description")
     val description: String = "",
 
-    @Column(name = "difficulty")
-    val difficulty: Int = Difficulty.Beginner.ordinal,
-
-    @Column(name = "thumbnail")
     val thumbnail: String = "",
 
-    @CreatedDate
-    @Column(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val front_left: Int = 0,
+    val back_left: Int = 0,
+    val design_left: Int = 0,
 
-    @Column(name = "due")
-    val due: LocalDateTime = LocalDateTime.MAX,
     val isRecruiting: Boolean = false,
+
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val modifiedAt: LocalDateTime = LocalDateTime.now(),
 
     @OneToMany( orphanRemoval = true, mappedBy = "project", cascade = [CascadeType.ALL])
     val techStacks: MutableList<ProjectStack> = ArrayList(),
 
-    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
-    val frontends: List<Task> = ArrayList(),
-    val front_left: Int = 0,
-
-    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
-    val backends: List<Task> = ArrayList(),
-    val back_left: Int = 0,
-
-    @OneToMany( orphanRemoval = true, cascade = [CascadeType.ALL], mappedBy = "project")
-    val designers: List<Task> = ArrayList(),
-    val design_left: Int = 0
+    @OneToMany( orphanRemoval = true, mappedBy = "project", cascade = [CascadeType.ALL])
+    val members: MutableList<Task> = ArrayList()
 ) {
 
 }
-
-enum class Difficulty{
-    Beginner, Easy, Normal, Intermediate, Master
-}
-
