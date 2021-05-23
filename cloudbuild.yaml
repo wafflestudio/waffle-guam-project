@@ -11,7 +11,7 @@
         - set
         - image
         - deployment/guam-deployment
-        - projects=gcr.io/waffle-guam/projects'
+        - projects=gcr.io/waffle-guam/projects
       env:
         - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-c'
         - 'CLOUDSDK_CONTAINER_CLUSTER=waffle-guam'
