@@ -1,43 +1,41 @@
 package waffle.guam.db.Project
 
+import waffle.guam.db.DevType.TechStack
 import waffle.guam.db.DevType.TechStackDTO
+import waffle.guam.db.ProjectStack
 import waffle.guam.db.Task
 import java.time.LocalDateTime
 
+// DTO for reading & passing information
 data class ProjectReadDTO(
-    val id: Long = 0,
-    val title: String = "",
-    val description: String = "",
-    val difficulty: Int = Difficulty.Beginner.ordinal,
-    val thumbnail: String = "",
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    val due: LocalDateTime = LocalDateTime.MAX,
-    val isRecruiting: Boolean = false,
-    // 클라에서 오고 갈 때는 DevType List 로 가지고 있자
-    val techStacks: MutableList<TechStackDTO> = ArrayList(),
-    val frontends: List<Task> = ArrayList(),
-    val front_left: Int = 0,
-    val backends: List<Task> = ArrayList(),
-    val back_left: Int = 0,
-    val designers: List<Task> = ArrayList(),
-    val design_left: Int = 0
+    var id: Long = 0L,
+    var title: String = "",
+    var description: String = "",
+
+    var thumbnail: String = "",
+
+    var front_left: Int = 0,
+    var back_left: Int = 0,
+    var design_left: Int = 0,
+
+    var isRecruiting: Boolean = false,
+
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+    var modifiedAt: LocalDateTime = LocalDateTime.now(),
+
+    // Entity 랑 Type 달라짐
+    var techStacks: MutableList<TechStackDTO> = ArrayList(),
+    val members: MutableList<Task> = ArrayList(),
 ) {
 
     companion object {
         fun of(e: Project): ProjectReadDTO {
             val l = e.techStacks.map { TechStackDTO.of( it.stack!! ) }
             return ProjectReadDTO(
-                e.id, e.title, e.description, e.difficulty, e.thumbnail, e.createdAt, e.due, e.isRecruiting,
-                l.toMutableList(), e.frontends, e.front_left, e.backends, e.back_left, e.designers, e.design_left
+                e.id, e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
+                e.isRecruiting, e.createdAt, e.modifiedAt, l.toMutableList(), e.members
             )
         }
-    }
-
-    fun toEntity() : Project {
-        // dev_type 은 service 에서 변환 후에 추가해주면 된다.
-        return Project(  title = this.title, description = this.description, difficulty = this.difficulty, thumbnail = this.thumbnail,
-            due = this.due, isRecruiting = this.isRecruiting, frontends = this.frontends,
-            front_left = this.front_left, backends = this.backends, back_left = this.back_left, designers = this.designers, design_left = this.design_left  )
     }
 
 }

@@ -6,6 +6,6 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class GuamApplication
 
-fun main() {
-    runApplication<GuamApplication>()
+fun main(args: Array<String>) {
+    runApplication<GuamApplication>(*args)
 }

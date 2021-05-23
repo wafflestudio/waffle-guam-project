@@ -1,17 +1,17 @@
 package waffle.guam.db.DevType
 
 data class TechStackDTO (
-    val type: String = "",
-    val mapping: String = "",
+    val name: String = "",
+    val aliases: String = "",
     val thumbnail: String = ""
 ){
     companion object{
         fun of(e: TechStack): TechStackDTO{
-            return TechStackDTO(e.type, e.mapping, e.thumbnail )
+            return TechStackDTO(e.name, e.aliases, e.thumbnail )
         }
     }
 
     fun toEntity(): TechStack {
-        return TechStack( type = type, mapping = mapping, thumbnail = thumbnail )
+        return TechStack( name = name, aliases = aliases, thumbnail = thumbnail )
     }
 }

@@ -6,18 +6,22 @@ import waffle.guam.db.DevType.TechStack
 import waffle.guam.db.Project.Project
 import javax.persistence.*
 
-@Table(name = "DevProject")
+@Table(name = "project_stacks")
 @Entity
 data class ProjectStack(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
+
+    val position: Int = 0,
+
     @ManyToOne
-    @JoinColumn(name = "PROJECT_ID_2")
-    var project: Project? = null,
+    @JoinColumn(name = "project_id")
+    var project: Project = Project(),
+
     @ManyToOne(cascade = [CascadeType.MERGE])
-    @JoinColumn(name = "DEV_ID" )
-    var stack: TechStack? = null
+    @JoinColumn(name = "stack_id" )
+    val stack: TechStack = TechStack()
 ){
 
 }

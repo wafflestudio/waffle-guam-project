@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: dev, prod
 
 ---
 spring.profiles.include:
@@ -11,14 +11,14 @@ spring:
   profiles: test
 
 server:
-  port: 9002
+  port: 9000
 
 ---
 spring:
   profiles: dev
 
 server:
-  port: 9001
+  port: 9000
 
 ---
 spring:
