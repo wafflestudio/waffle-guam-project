@@ -13,14 +13,15 @@ data class Task(
     val position: Int = 0,
     val task: String = "Let's get it started!",
 
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    val modifiedAt: LocalDateTime = LocalDateTime.now(),
+    val created_at: LocalDateTime = LocalDateTime.now(),
+    val modified_at: LocalDateTime = LocalDateTime.now(),
 
+    @Column(name = "profile_id")
     val user_id: Long = 0L,
 
     @ManyToOne
-    @JoinColumn(name = "project_id", insertable = false, updatable = false)
-    val project: Project = Project(),
+    @JoinColumn(name = "project_id", updatable = false)
+    val project_id: Project = Project(),
 )
 
 //  Position 구조

@@ -1,13 +1,11 @@
 package waffle.guam.db.Project
 
-import waffle.guam.db.DevType.TechStack
 import waffle.guam.db.DevType.TechStackDTO
 import waffle.guam.db.Task
-import waffle.guam.db.ProjectStack
 import java.time.LocalDateTime
 
 data class ProjectDTO(
-    var id: Long = 0L,
+    var id: Long? = 0L,
     var title: String = "",
     var description: String = "",
 
@@ -26,19 +24,13 @@ data class ProjectDTO(
     var techStacks: MutableList<TechStackDTO> = ArrayList(),
     val members: MutableList<Task> = ArrayList(),
 ) {
-    constructor(p: ProjectReadDTO): this( id = p.id,
-        title = p.title, description = p.description,
-        thumbnail = p.thumbnail, createdAt = p.createdAt,
-        isRecruiting = p.isRecruiting, front_left = p.front_left,
-        back_left = p.back_left, design_left = p.design_left
-    )
 
     companion object {
         fun of(e: Project): ProjectDTO {
             val l = e.techStacks.map { TechStackDTO.of( it.stack!! ) }
             return ProjectDTO(
-                e.id, e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
-                e.isRecruiting, e.createdAt, e.modifiedAt, l.toMutableList(), e.members
+                null, e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
+                e.isRecruiting, e.created_at, e.modified_at, l.toMutableList(), e.tasks
             )
         }
     }
@@ -58,6 +50,17 @@ data class ProjectDTO(
             back_left = p.back_left
             design_left = p.design_left
             return this
+    }
+
+    fun create(p: ProjectCreateDTO): ProjectDTO{
+        title = p.title
+        description = p.description
+        thumbnail = p.thumbnail
+        isRecruiting = true
+        front_left = p.front_left
+        back_left = p.back_left
+        design_left = p.design_left
+        return this
     }
 
 }

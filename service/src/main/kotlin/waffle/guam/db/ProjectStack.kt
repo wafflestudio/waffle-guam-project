@@ -13,7 +13,7 @@ data class ProjectStack(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
 
-    val position: Int = 0,
+    val position_info: Int = 0,
 
     @ManyToOne
     @JoinColumn(name = "project_id")

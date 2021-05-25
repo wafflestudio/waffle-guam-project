@@ -1,14 +1,12 @@
 package waffle.guam.db.Project
 
-import waffle.guam.db.DevType.TechStack
 import waffle.guam.db.DevType.TechStackDTO
-import waffle.guam.db.ProjectStack
-import waffle.guam.db.Task
+import waffle.guam.db.User.UserReadDTO
 import java.time.LocalDateTime
 
 // DTO for reading & passing information
+// Id column excluded
 data class ProjectReadDTO(
-    var id: Long = 0L,
     var title: String = "",
     var description: String = "",
 
@@ -25,15 +23,14 @@ data class ProjectReadDTO(
 
     // Entity 랑 Type 달라짐
     var techStacks: MutableList<TechStackDTO> = ArrayList(),
-    val members: MutableList<Task> = ArrayList(),
+    var members: MutableList<UserReadDTO> = ArrayList(),
 ) {
 
     companion object {
         fun of(e: Project): ProjectReadDTO {
-            val l = e.techStacks.map { TechStackDTO.of( it.stack!! ) }
             return ProjectReadDTO(
-                e.id, e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
-                e.isRecruiting, e.createdAt, e.modifiedAt, l.toMutableList(), e.members
+                e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
+                e.isRecruiting, e.created_at, e.modified_at
             )
         }
     }

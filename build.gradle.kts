@@ -54,6 +54,8 @@ subprojects{
         implementation(kotlin("reflect"))
         implementation("io.springfox:springfox-swagger2:2.9.2")
         implementation("io.springfox:springfox-swagger-ui:2.9.2")
+        implementation("com.squareup.okhttp3:okhttp:3.12.0")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.0")
     }
 }
 

@@ -11,7 +11,7 @@ import javax.persistence.*
 data class Project(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L,
+    val id: Long? = 0L,
 
     val title: String = "",
 
@@ -19,20 +19,24 @@ data class Project(
 
     val thumbnail: String = "",
 
+    @Column(name = "headcount_front")
     val front_left: Int = 0,
+    @Column(name = "headcount_back")
     val back_left: Int = 0,
+    @Column(name = "headcount_designer")
     val design_left: Int = 0,
 
+    @Column(name = "is_recruiting")
     val isRecruiting: Boolean = false,
 
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    val modifiedAt: LocalDateTime = LocalDateTime.now(),
+    val created_at: LocalDateTime = LocalDateTime.now(),
+    val modified_at: LocalDateTime = LocalDateTime.now(),
 
     @OneToMany( orphanRemoval = true, mappedBy = "project", cascade = [CascadeType.ALL])
     val techStacks: MutableList<ProjectStack> = ArrayList(),
 
-    @OneToMany( orphanRemoval = true, mappedBy = "project", cascade = [CascadeType.ALL])
-    val members: MutableList<Task> = ArrayList()
+    @OneToMany( orphanRemoval = true, mappedBy = "project_id", cascade = [CascadeType.ALL])
+    val tasks: MutableList<Task> = ArrayList()
 ) {
 
 }
