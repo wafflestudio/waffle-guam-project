@@ -47,7 +47,7 @@ class ProjectController(
     // 4. 프로젝트 검색 - 활동기간? 잔여 포지션??
     @GetMapping("/projects/search")
     @ResponseBody
-    fun searchProject(@RequestParam keyword: String, @RequestBody(required=false) body: Pair<Int, List<TechStackDTO>>): List<ProjectReadDTO> {
+    fun searchProject(@RequestParam keyword: String, @RequestBody(required=false) body: Pair<Int, List<TechStackDTO>>?): List<ProjectReadDTO> {
         return projectService.searchByKeyword(keyword)
     }
 

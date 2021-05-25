@@ -17,7 +17,7 @@ data class Task(
     val modified_at: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "profile_id")
-    val user_id: Long = 0L,
+    val profile_id: Long = 0L,
 
     @ManyToOne
     @JoinColumn(name = "project_id", updatable = false)

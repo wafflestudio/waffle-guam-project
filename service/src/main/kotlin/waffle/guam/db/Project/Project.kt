@@ -20,11 +20,11 @@ data class Project(
     val thumbnail: String = "",
 
     @Column(name = "headcount_front")
-    val front_left: Int = 0,
+    val headcount_front: Int = 0,
     @Column(name = "headcount_back")
-    val back_left: Int = 0,
+    val headcount_back: Int = 0,
     @Column(name = "headcount_designer")
-    val design_left: Int = 0,
+    val headcount_designer: Int = 0,
 
     @Column(name = "is_recruiting")
     val isRecruiting: Boolean = false,

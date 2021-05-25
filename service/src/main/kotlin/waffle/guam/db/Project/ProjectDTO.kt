@@ -29,7 +29,7 @@ data class ProjectDTO(
         fun of(e: Project): ProjectDTO {
             val l = e.techStacks.map { TechStackDTO.of( it.stack!! ) }
             return ProjectDTO(
-                null, e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
+                null, e.title, e.description, e.thumbnail, e.headcount_front, e.headcount_back, e.headcount_designer,
                 e.isRecruiting, e.created_at, e.modified_at, l.toMutableList(), e.tasks
             )
         }

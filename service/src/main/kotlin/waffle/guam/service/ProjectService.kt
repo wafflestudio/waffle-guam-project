@@ -8,7 +8,6 @@ import waffle.guam.db.Project.ProjectDTO
 import waffle.guam.db.Project.ProjectReadDTO
 import waffle.guam.db.ProjectStack
 import waffle.guam.db.Task
-import waffle.guam.db.User.UserDTO
 import waffle.guam.db.User.UserReadDTO
 import waffle.guam.repository.Junctions.ProjectStackRepository
 import waffle.guam.repository.Junctions.ProjectUserRepository
@@ -34,7 +33,7 @@ class ProjectService(
         l.map {
             stackList.add(ProjectStack( project = new, stack = it ))
         }
-        taskList.add(Task( project_id = new , user_id = creatorId ))
+        taskList.add(Task( project_id = new , profile_id = creatorId ))
         new.techStacks.addAll(stackList)
         new.tasks.addAll(taskList)
         projectRepository.save(new)
@@ -53,7 +52,7 @@ class ProjectService(
         val res = ProjectReadDTO.of(target)
         res.techStacks = target.techStacks.map { TechStackDTO.of( it.stack ) } as MutableList<TechStackDTO>
 
-        val idList = target.tasks.map { it.user_id }
+        val idList = target.tasks.map { it.profile_id }
         res.members = apiService.fetchUser(idList) as MutableList<UserReadDTO>
 
         return res

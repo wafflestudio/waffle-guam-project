@@ -29,7 +29,7 @@ data class ProjectReadDTO(
     companion object {
         fun of(e: Project): ProjectReadDTO {
             return ProjectReadDTO(
-                e.title, e.description, e.thumbnail, e.front_left, e.back_left, e.design_left,
+                e.title, e.description, e.thumbnail, e.headcount_front, e.headcount_back, e.headcount_designer,
                 e.isRecruiting, e.created_at, e.modified_at
             )
         }
